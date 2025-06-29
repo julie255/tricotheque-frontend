@@ -8,15 +8,39 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react';
+import { toaster } from '../components/ui/toaster';
+import { useLogin } from '../api/hooks/useAuth';
 import Navigation from '../composants/Navigation';
 
 export default function Connexion() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    const loginMutation = useLogin();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Email: ${email}\nMot de passe: ${password}`);
+        
+        loginMutation.mutate(
+            { email, password },
+            {
+                onSuccess: () => {
+                    toaster.create({
+                        title: "Succès",
+                        description: "Connexion réussie !",
+                        type: "success",
+                    });
+                    // Navigation is now handled by the useLogin hook
+                },
+                onError: () => {
+                    toaster.create({
+                        title: "Erreur",
+                        description: "Email ou mot de passe incorrect.",
+                        type: "error",
+                    });
+                },
+            }
+        );
     };
 
     return (
@@ -58,6 +82,8 @@ export default function Connexion() {
                                     borderRadius="lg"
                                     border="1px solid"
                                     borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
                                     required
                                     _focus={{
                                         borderColor: "pink.600",
@@ -77,6 +103,8 @@ export default function Connexion() {
                                     borderRadius="lg"
                                     border="1px solid"
                                     borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
                                     required
                                     _focus={{
                                         borderColor: "pink.600",
@@ -93,8 +121,9 @@ export default function Connexion() {
                                 fontWeight="700"
                                 fontSize="lg"
                                 _hover={{ bg: "pink.700" }}
+                                disabled={loginMutation.isPending}
                             >
-                                Connexion
+                                {loginMutation.isPending ? "Connexion en cours..." : "Connexion"}
                             </Button>
                         </VStack>
                     </form>

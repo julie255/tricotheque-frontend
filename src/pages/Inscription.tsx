@@ -9,20 +9,51 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react';
+import { toaster } from '../components/ui/toaster';
+import { useRegister } from '../api/hooks/useAuth';
 import Navigation from '../composants/Navigation';
 
 export default function Inscription() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState('');
+    
+    const registerMutation = useRegister();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
         if (password !== confirm) {
-            alert("Les mots de passe ne correspondent pas !");
+            toaster.create({
+                title: "Erreur",
+                description: "Les mots de passe ne correspondent pas !",
+                type: "error",
+            });
             return;
         }
-        alert(`Inscription réussie !\nEmail: ${email}`);
+
+        registerMutation.mutate(
+            { firstName, lastName, email, password },
+            {
+                onSuccess: () => {
+                    toaster.create({
+                        title: "Succès",
+                        description: "Inscription réussie ! Vous êtes maintenant connecté.",
+                        type: "success",
+                    });
+
+                },
+                onError: () => {
+                    toaster.create({
+                        title: "Erreur",
+                        description: "Erreur lors de l'inscription. Veuillez réessayer.",
+                        type: "error",
+                    });
+                },
+            }
+        );
     };
 
     return (
@@ -55,6 +86,48 @@ export default function Inscription() {
                         <VStack gap={5}>
                             <Box width="full">
                                 <Text fontWeight="600" color="gray.600" mb={2} display="block">
+                                    Prénom
+                                </Text>
+                                <Input
+                                    type="text"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    borderRadius="lg"
+                                    border="1px solid"
+                                    borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
+                                    required
+                                    _focus={{
+                                        borderColor: "pink.600",
+                                        boxShadow: "0 0 0 1px var(--chakra-colors-pink-600)"
+                                    }}
+                                />
+                            </Box>
+
+                            <Box width="full">
+                                <Text fontWeight="600" color="gray.600" mb={2} display="block">
+                                    Nom
+                                </Text>
+                                <Input
+                                    type="text"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    borderRadius="lg"
+                                    border="1px solid"
+                                    borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
+                                    required
+                                    _focus={{
+                                        borderColor: "pink.600",
+                                        boxShadow: "0 0 0 1px var(--chakra-colors-pink-600)"
+                                    }}
+                                />
+                            </Box>
+
+                            <Box width="full">
+                                <Text fontWeight="600" color="gray.600" mb={2} display="block">
                                     Email
                                 </Text>
                                 <Input
@@ -64,6 +137,8 @@ export default function Inscription() {
                                     borderRadius="lg"
                                     border="1px solid"
                                     borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
                                     required
                                     _focus={{
                                         borderColor: "pink.600",
@@ -83,6 +158,8 @@ export default function Inscription() {
                                     borderRadius="lg"
                                     border="1px solid"
                                     borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
                                     required
                                     _focus={{
                                         borderColor: "pink.600",
@@ -102,6 +179,8 @@ export default function Inscription() {
                                     borderRadius="lg"
                                     border="1px solid"
                                     borderColor="gray.300"
+                                    color="gray.800"
+                                    bg="white"
                                     required
                                     _focus={{
                                         borderColor: "pink.600",
@@ -118,8 +197,9 @@ export default function Inscription() {
                                 fontWeight="700"
                                 fontSize="lg"
                                 _hover={{ bg: "pink.700" }}
+                                disabled={registerMutation.isPending}
                             >
-                                S'inscrire
+                                {registerMutation.isPending ? "Inscription en cours..." : "S'inscrire"}
                             </Button>
                         </VStack>
                     </form>
