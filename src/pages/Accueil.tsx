@@ -18,19 +18,19 @@ export default function Accueil() {
         {
             title: "L'univers du crochet",
             description: "Explore des créations uniques faites main, parfaites pour les amoureux du fil.",
-            image: "/images/crochet.jpg",
-            link: "/modeles"
+            image: "https://www.blog2mode.com/wp-content/uploads/Univers-Tricot.jpg",
+            link: "/galerie"
         },
         {
             title: "Notre communauté",
             description: "Rejoins une communauté passionnée par le crochet et le partage.",
-            image: "/images/communaute.jpg",
+            image: "https://media.istockphoto.com/id/1130443936/photo/mother-and-daughter-knitting-at-home.jpg?s=170667a&w=0&k=20&c=3O3_9k9M3geg6KIzmcFduXEeOTmgcL0pJoLPKip-zlw=",
             link: "/communaute"
         },
         {
             title: "Contact et aide",
             description: "Besoin de nous contacter ? Nous sommes là pour vous aider.",
-            image: "/images/contact.jpg",
+            image: "https://img.freepik.com/vecteurs-premium/icones-contact-communication-icones-connexion-contactez-nous-appeler-telephone-plan-pin-internet-mail_570092-1010.jpg?w=2000",
             link: "/contact"
         }
     ];

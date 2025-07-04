@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Box,
-  Container,
-  Heading,
-  Input,
-  Button,
-  VStack,
-  Text,
+    Box,
+    Container,
+    Heading,
+    Input,
+    Button,
+    VStack,
+    Text,
 } from '@chakra-ui/react';
 import { toaster } from '../components/ui/toaster';
 import { useRegister } from '../api/hooks/useAuth';
@@ -19,12 +19,12 @@ export default function Inscription() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState('');
-    
+
     const registerMutation = useRegister();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (password !== confirm) {
             toaster.create({
                 title: "Erreur",
@@ -63,7 +63,7 @@ export default function Inscription() {
             minH="100vh"
         >
             <Navigation />
-            
+
             <Container maxW="400px" mt={12}>
                 <Box
                     bg="white"
@@ -81,7 +81,7 @@ export default function Inscription() {
                     >
                         Créer un compte
                     </Heading>
-                    
+
                     <form onSubmit={handleSubmit}>
                         <VStack gap={5}>
                             <Box width="full">

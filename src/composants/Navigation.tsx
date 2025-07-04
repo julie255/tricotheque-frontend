@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  IconButton,
-  VStack,
-  HStack,
-  useDisclosure,
+    Box,
+    Flex,
+    Text,
+    Button,
+    IconButton,
+    VStack,
+    HStack,
+    useDisclosure,
 } from "@chakra-ui/react";
 
 export default function Navigation() {
@@ -148,6 +148,7 @@ export default function Navigation() {
                                 Rechercher
                             </Button>
                         </Link>
+                        <Link to="/communaute">Communauté</Link>
                     </VStack>
                 </Box>
             )}

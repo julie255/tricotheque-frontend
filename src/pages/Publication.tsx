@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Box,
-  Container,
-  Heading,
-  Input,
-  Button,
-  VStack,
-  Text,
+    Box,
+    Container,
+    Heading,
+    Input,
+    Button,
+    VStack,
+    Text,
 } from '@chakra-ui/react';
 import Navigation from '../composants/Navigation';
 
@@ -52,7 +52,7 @@ const Publication = () => {
             minH="100vh"
         >
             <Navigation />
-            
+
             <Container maxW="600px" mt={10} px={5}>
                 <Box
                     bg="pink.50"
@@ -69,7 +69,7 @@ const Publication = () => {
                     >
                         Ajouter une création
                     </Heading>
-                    
+
                     <VStack gap={5}>
                         <Box width="full">
                             <Text fontWeight="600" color="pink.700" mb={2} display="block">

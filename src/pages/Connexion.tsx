@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Box,
-  Container,
-  Heading,
-  Input,
-  Button,
-  VStack,
-  Text,
+    Box,
+    Container,
+    Heading,
+    Input,
+    Button,
+    VStack,
+    Text,
 } from '@chakra-ui/react';
 import { toaster } from '../components/ui/toaster';
 import { useLogin } from '../api/hooks/useAuth';
@@ -15,12 +15,12 @@ import Navigation from '../composants/Navigation';
 export default function Connexion() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+
     const loginMutation = useLogin();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         loginMutation.mutate(
             { email, password },
             {
@@ -30,7 +30,7 @@ export default function Connexion() {
                         description: "Connexion réussie !",
                         type: "success",
                     });
-                    // Navigation is now handled by the useLogin hook
+                    // La navigation est désormais gérée par le hook useLogin
                 },
                 onError: () => {
                     toaster.create({
@@ -50,7 +50,7 @@ export default function Connexion() {
             minH="100vh"
         >
             <Navigation />
-            
+
             <Container maxW="400px" mt={12}>
                 <Box
                     bg="white"
@@ -68,7 +68,7 @@ export default function Connexion() {
                     >
                         Se connecter
                     </Heading>
-                    
+
                     <form onSubmit={handleSubmit}>
                         <VStack gap={5}>
                             <Box width="full">
